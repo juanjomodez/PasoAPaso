@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paso a Paso</title>
+  <link rel="icon" href="img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <div id="fondo"></div>
+
+  <!-- INICIO -->
+  <section class="pantalla activa" id="p-inicio">
+    <div class="inicio-cabeza">
+      <img src="img/logo.svg" alt="" class="logo">
+      <h1>Paso <span>a</span> Paso</h1>
+      <p class="lema">Aprende los pasos básicos de salsa desde tu casa</p>
+    </div>
+    <div class="tarjetas">
+      <button class="tarjeta" data-paso="basico">
+        <span class="tarjeta-num">1</span>
+        <span class="tarjeta-titulo">Básico lineal</span>
+        <span class="tarjeta-desc">Adelante y atrás, el primero que se aprende</span>
+      </button>
+      <button class="tarjeta" data-paso="cruzado">
+        <span class="tarjeta-num">2</span>
+        <span class="tarjeta-titulo">Cruzado</span>
+        <span class="tarjeta-desc">Un pie cruza por delante del otro</span>
+      </button>
+      <button class="tarjeta" data-paso="lateral">
+        <span class="tarjeta-num">3</span>
+        <span class="tarjeta-titulo">Lateral</span>
+        <span class="tarjeta-desc">De lado a lado marcando el tiempo</span>
+      </button>
+    </div>
+    <button class="enlace" id="btn-como">¿Cómo funciona?</button>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <div class="modal" id="modal-como">
+    <div class="modal-caja">
+      <h2>Así funciona</h2>
+      <ol class="pasos-como">
+        <li><b>Escoge un paso.</b> Hay tres: básico lineal, cruzado y lateral.</li>
+        <li><b>Mira la explicación</b> de la instructora las veces que quieras.</li>
+        <li><b>Practica con el video</b> de 15 segundos. Puedes grabarte con la cámara o subir un video tuyo.</li>
+        <li><b>Recibe tu retroalimentación:</b> qué tan parecido te salió, qué hiciste bien y qué puedes mejorar.</li>
+      </ol>
+      <p class="nota">Ponte a unos 2 o 3 metros de la cámara, que se te vea el cuerpo completo (sobre todo los pies) y busca un lugar con buena luz. Puedes grabarte de frente, de espaldas o de lado.</p>
+      <button class="btn principal" id="btn-entendido">¡Entendido!</button>
+    </div>
+  </div>
+
+  <!-- EXPLICACION -->
+  <section class="pantalla" id="p-tutorial">
+    <header class="barra">
+      <button class="btn-volver" data-ir="p-inicio">← Inicio</button>
+      <h2 class="titulo-paso">Paso <span class="nombre-paso"></span></h2>
+      <span class="etapa">1 de 3 · Explicación</span>
+    </header>
+    <div class="zona-video">
+      <video id="video-charla" controls playsinline preload="metadata"></video>
+    </div>
+    <footer class="acciones">
+      <button class="btn" id="btn-repetir-charla">↺ Ver otra vez</button>
+      <button class="btn principal" id="btn-listo">Estoy listo, a practicar →</button>
+    </footer>
+  </section>
+
+  <!-- ESCOGER COMO PRACTICAR -->
+  <section class="pantalla" id="p-modo">
+    <header class="barra">
+      <button class="btn-volver" data-ir="p-tutorial">← Explicación</button>
+      <h2 class="titulo-paso">Paso <span class="nombre-paso"></span></h2>
+      <span class="etapa">2 de 3 · Práctica</span>
+    </header>
+    <div class="modos">
+      <button class="modo" id="btn-modo-grabar">
+        <span class="modo-icono"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="currentColor"/></svg></span>
+        <span class="modo-titulo">Grabarme</span>
+        <span class="modo-desc">Usa la cámara del computador y baila al tiempo con la instructora.</span>
+      </button>
+      <button class="modo" id="btn-modo-subir">
+        <span class="modo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg></span>
+        <span class="modo-titulo">Subir mi video</span>
+        <span class="modo-desc">Graba con el celular siguiendo el video de práctica y súbelo acá.</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- GRABAR -->
+  <section class="pantalla" id="p-grabar">
+    <header class="barra">
+      <button class="btn-volver" id="btn-salir-grabar">← Cambiar opción</button>
+      <h2 class="titulo-paso">Paso <span class="nombre-paso"></span></h2>
+      <span class="etapa">2 de 3 · Grabando</span>
+    </header>
+    <div class="escenario">
+      <div class="marco-instr">
+        <video id="video-practica-grabar" playsinline preload="auto"></video>
+        <div class="cuenta" id="cuenta"></div>
+      </div>
+      <div class="camara">
+        <video id="video-camara" autoplay muted playsinline></video>
+        <span class="punto-rec" id="punto-rec">REC</span>
+      </div>
+    </div>
+    <footer class="acciones">
+      <span class="ayuda" id="ayuda-grabar"></span>
+      <button class="btn principal" id="btn-empezar">Empezar</button>
+    </footer>
+  </section>
+
+  <!-- SUBIR -->
+  <section class="pantalla" id="p-subir">
+    <header class="barra">
+      <button class="btn-volver" data-ir="p-modo">← Cambiar opción</button>
+      <h2 class="titulo-paso">Paso <span class="nombre-paso"></span></h2>
+      <span class="etapa">2 de 3 · Subir video</span>
+    </header>
+    <div class="subir-grid">
+      <div class="subir-video">
+        <video id="video-practica-subir" controls playsinline preload="metadata"></video>
+        <a class="btn" id="btn-descargar" download>⬇ Descargar video de práctica</a>
+      </div>
+      <label class="soltar" id="soltar">
+        <input type="file" id="archivo" accept="video/*" hidden>
+        <span class="soltar-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg></span>
+        <span class="soltar-texto">Arrastra tu video acá<br>o haz clic para buscarlo</span>
+        <span class="soltar-nota">Graba mientras sigues el video de práctica. Si tu video es más largo, se busca solo la parte que más se parece a la instructora.</span>
+      </label>
+    </div>
+  </section>
+
+  <!-- ANALIZANDO -->
+  <section class="pantalla" id="p-analizando">
+    <div class="analizando">
+      <svg class="huellas" viewBox="0 0 200 200">
+        <defs>
+          <g id="huella">
+            <path d="M0 -44 C 15 -44, 23 -32, 22 -16 C 21 -2, 15 6, 12 14 C 10 19, 5 21, 0 21 C -6 21, -11 18, -12 12 C -14 2, -21 -6, -21 -18 C -21 -34, -13 -44, 0 -44 Z"/>
+            <path d="M-11 30 C -11 24, 11 24, 11 30 L 11 40 C 11 49, -11 49, -11 40 Z"/>
+          </g>
+        </defs>
+        <use href="#huella" class="h1" transform="translate(78 78) rotate(-14) scale(1.15)"/>
+        <use href="#huella" class="h2" transform="translate(126 118) rotate(12) scale(1.15)"/>
+      </svg>
+      <h2>Analizando tu baile</h2>
+      <ul class="fases" id="fases">
+        <li>Detectando tu cuerpo</li>
+        <li>Comparando con la instructora</li>
+        <li>Preparando tus consejos</li>
+      </ul>
+      <div class="progreso"><i id="barra-progreso"></i></div>
+    </div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section class="pantalla" id="p-resultado">
+    <header class="barra">
+      <span></span>
+      <h2 class="titulo-paso">Paso <span class="nombre-paso"></span></h2>
+      <span class="etapa">3 de 3 · Resultado</span>
+    </header>
+    <div class="resultado">
+      <div class="res-izq">
+        <div class="nivel" id="nivel">
+          <div class="nivel-barras"><i></i><i></i><i></i><i></i></div>
+          <h2 id="res-titulo"></h2>
+          <p id="res-resumen"></p>
+        </div>
+        <div class="comparacion">
+          <div class="dos-videos">
+            <div class="cuadro-video espejo">
+              <video id="video-usuario" muted playsinline></video>
+              <canvas id="esqueleto"></canvas>
+              <span class="etiqueta">Tú</span>
+            </div>
+            <div class="cuadro-video">
+              <video id="video-instr" muted playsinline></video>
+              <span class="etiqueta">Instructora</span>
+            </div>
+          </div>
+          <button class="btn chico" id="btn-comparar">▶ Ver los dos videos juntos</button>
+        </div>
+      </div>
+      <div class="res-der">
+        <div class="avisos" id="res-avisos"></div>
+        <h3 class="t-bien">Lo que hiciste bien</h3>
+        <ul id="res-bien" class="lista bien"></ul>
+        <h3 class="t-mejorar">Lo que puedes mejorar</h3>
+        <ul id="res-mejorar" class="lista mejorar"></ul>
+      </div>
+    </div>
+    <footer class="acciones">
+      <button class="btn" id="btn-terminar">Terminar y escoger otro paso</button>
+      <button class="btn principal" id="btn-repetir">↺ Intentarlo otra vez</button>
+    </footer>
+  </section>
+
+  <div class="toast" id="toast"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

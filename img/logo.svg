@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- dos huellas de zapato marcando el paso, con una nota musical -->
+  <defs>
+    <g id="huella">
+      <path d="M0 -44 C 15 -44, 23 -32, 22 -16 C 21 -2, 15 6, 12 14 C 10 19, 5 21, 0 21 C -6 21, -11 18, -12 12 C -14 2, -21 -6, -21 -18 C -21 -34, -13 -44, 0 -44 Z"/>
+      <path d="M-11 30 C -11 24, 11 24, 11 30 L 11 40 C 11 49, -11 49, -11 40 Z"/>
+    </g>
+  </defs>
+  <path d="M58 150 C 34 120, 44 82, 70 70" stroke="#ffc72c" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 10" opacity=".7"/>
+  <use href="#huella" fill="#ffc72c" transform="translate(78 78) rotate(-14) scale(1.15)"/>
+  <use href="#huella" fill="#e8323f" transform="translate(126 118) rotate(12) scale(1.15)"/>
+  <g fill="#ffc72c">
+    <ellipse cx="160" cy="54" rx="9" ry="7" transform="rotate(-20 160 54)"/>
+    <rect x="166" y="16" width="5" height="38" rx="2"/>
+    <path d="M168 16 C 180 20, 188 26, 186 40 C 182 30, 176 28, 168 28 Z"/>
+  </g>
+</svg>
