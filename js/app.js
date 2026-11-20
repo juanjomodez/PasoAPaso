@@ -4,6 +4,8 @@
 import { analizar, mejorPedazo } from "./analisis.js";
 import { cargarDetector, posesDeArchivo, recortar, FPS } from "./poses.js";
 
+const ES_TACTIL = window.matchMedia("(pointer: coarse)").matches;
+const MAX_SEGUNDOS = ES_TACTIL ? 30 : 60;   // el analisis en celular es mas lento
 const NIVEL_NUM = { muy_parecido: 4, parecido: 3, algo_parecido: 2, lejos: 1 };
 const CONEXIONES = [[11, 12], [11, 13], [13, 15], [12, 14], [14, 16], [11, 23], [12, 24], [23, 24],
                     [23, 25], [25, 27], [27, 31], [24, 26], [26, 28], [28, 32]];
@@ -32,7 +34,25 @@ function ir(id) {
   $("#" + id).classList.add("activa");
   $$("video").forEach((v) => { if (!v.closest("#" + id) && v.id !== "video-camara") v.pause(); });
   if (id !== "p-grabar") apagarCamara();
+  pantallaEncendida(id === "p-grabar" || id === "p-analizando");
 }
+
+// evita que el celular o la tablet apaguen la pantalla grabando o analizando
+let bloqueoPantalla = null;
+async function pantallaEncendida(on) {
+  try {
+    if (on && "wakeLock" in navigator && !bloqueoPantalla) {
+      bloqueoPantalla = await navigator.wakeLock.request("screen");
+      bloqueoPantalla.addEventListener("release", () => { bloqueoPantalla = null; });
+    } else if (!on && bloqueoPantalla) {
+      await bloqueoPantalla.release();
+      bloqueoPantalla = null;
+    }
+  } catch (e) { /* no es critico */ }
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && $("#p-grabar").classList.contains("activa")) pantallaEncendida(true);
+});
 
 function aviso(texto, ms = 4500) {
   const t = $("#toast");
@@ -57,6 +77,7 @@ $$(".tarjeta").forEach((t) => t.addEventListener("click", () => escogerPaso(t.da
 
 function escogerPaso(paso) {
   if (!REF) { aviso("Todavía no se cargan los datos de la instructora, revisa que estés usando Live Server."); return; }
+  if (!navigator.onLine) aviso("Sin conexión: los videos necesitan internet para verse.", 6000);
   pasoActual = paso;
   const info = REF.pasos[paso];
   $$(".nombre-paso").forEach((s) => (s.textContent = info.nombre));
@@ -95,7 +116,7 @@ async function abrirGrabar() {
   btn.disabled = true;
   $("#ayuda-grabar").textContent = "Abriendo la cámara...";
   try {
-    streamCamara = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false });
+    streamCamara = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false });
     $("#video-camara").srcObject = streamCamara;
   } catch (e) {
     aviso("No se pudo abrir la cámara. Revisa los permisos del navegador o usa la opción de subir video.");
@@ -128,6 +149,9 @@ $("#btn-empezar").addEventListener("click", async () => {
   if (!streamCamara) return;
   $("#btn-empezar").style.display = "none";
   $("#ayuda-grabar").textContent = "¡Prepárate!";
+  // Safari (iPhone/iPad) solo deja reproducir con sonido si el primer play() ocurre dentro del toque
+  const pr = $("#video-practica-grabar");
+  pr.play().then(() => { pr.pause(); pr.currentTime = 0; }).catch(() => {});
   await cuentaRegresiva(5);
   if (!streamCamara) return; // se salio durante la cuenta
   empezarGrabacion();
@@ -207,8 +231,8 @@ async function procesar(blob) {
   if (urlUsuario) URL.revokeObjectURL(urlUsuario);
   urlUsuario = URL.createObjectURL(blob);
   try {
-    let poses = await posesDeArchivo(urlUsuario, { progreso: (p) => { $("#barra-progreso").style.width = Math.round(p * 100) + "%"; } });
-    if (poses.recortado) aviso("El video es largo, solo se revisó el primer minuto.");
+    let poses = await posesDeArchivo(urlUsuario, { maxSegundos: MAX_SEGUNDOS, progreso: (p) => { $("#barra-progreso").style.width = Math.round(p * 100) + "%"; } });
+    if (poses.recortado) aviso("El video es largo, solo se revisó " + (ES_TACTIL ? "los primeros 30 segundos" : "el primer minuto") + ".");
     $("#barra-progreso").style.width = "100%";
     fase(1);
     await pausa();
@@ -314,3 +338,27 @@ $("#btn-repetir").addEventListener("click", () => {
   else ir("p-subir");
 });
 $("#btn-terminar").addEventListener("click", () => ir("p-inicio"));
+
+// ---------------------------------------------------------------- instalar como app (PWA)
+let eventoInstalar = null;
+const yaInstalada = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  eventoInstalar = e;
+  if (!yaInstalada) $("#btn-instalar").hidden = false;
+});
+$("#btn-instalar").addEventListener("click", async () => {
+  if (!eventoInstalar) return;
+  eventoInstalar.prompt();
+  await eventoInstalar.userChoice.catch(() => {});
+  eventoInstalar = null;
+  $("#btn-instalar").hidden = true;
+});
+window.addEventListener("appinstalled", () => { $("#btn-instalar").hidden = true; });
+// iPhone y iPad no tienen boton automatico: se muestra la indicacion
+const esIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+if (esIOS && !yaInstalada) $("#nota-ios").hidden = false;
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch((e) => console.warn("Sin service worker", e)));
+}

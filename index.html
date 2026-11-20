@@ -2,7 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#170306">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Paso a Paso">
+  <meta name="description" content="Aprende los pasos básicos de salsa desde tu casa">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <title>Paso a Paso</title>
   <link rel="icon" href="img/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +45,8 @@
       </button>
     </div>
     <button class="enlace" id="btn-como">¿Cómo funciona?</button>
+    <button class="enlace" id="btn-instalar" hidden>⬇ Instalar la app</button>
+    <p class="nota-ios" id="nota-ios" hidden>En iPhone o iPad: toca el botón Compartir y elige «Añadir a pantalla de inicio».</p>
   </section>
 
   <!-- COMO FUNCIONA -->
@@ -81,7 +91,7 @@
       <button class="modo" id="btn-modo-grabar">
         <span class="modo-icono"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="currentColor"/></svg></span>
         <span class="modo-titulo">Grabarme</span>
-        <span class="modo-desc">Usa la cámara del computador y baila al tiempo con la instructora.</span>
+        <span class="modo-desc">Usa la cámara de tu celular, tablet o computador y baila al tiempo con la instructora.</span>
       </button>
       <button class="modo" id="btn-modo-subir">
         <span class="modo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg></span>
@@ -129,7 +139,10 @@
       <label class="soltar" id="soltar">
         <input type="file" id="archivo" accept="video/*" hidden>
         <span class="soltar-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg></span>
-        <span class="soltar-texto">Arrastra tu video acá<br>o haz clic para buscarlo</span>
+        <span class="soltar-texto">
+          <span class="solo-mouse">Arrastra tu video acá<br>o haz clic para buscarlo</span>
+          <span class="solo-toque">Toca acá para<br>elegir tu video</span>
+        </span>
         <span class="soltar-nota">Graba mientras sigues el video de práctica. Si tu video es más largo, se busca solo la parte que más se parece a la instructora.</span>
       </label>
     </div>
