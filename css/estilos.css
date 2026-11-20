@@ -377,3 +377,12 @@ h1 span { color: var(--texto); font-size: .6em; vertical-align: .2em; }
   .subir-grid { grid-template-columns: 1.3fr 1fr; overflow: visible; }
   .subir-video video { max-height: calc(100% - 60px); }
 }
+
+/* aviso cuando se abre con doble clic */
+.aviso-abrir {
+  position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 1rem; padding: 2rem; font-size: 1.2rem; line-height: 1.5;
+  background: rgba(15, 2, 4, .96); color: var(--texto);
+}
+.aviso-abrir[hidden] { display: none; }
+.aviso-abrir b { color: var(--amarillo); }

@@ -1,3 +1,4 @@
+window.__pasoOk = true; // avisa a index.html que el programa si cargo
 // Paso a Paso - logica de la pagina
 // Maneja las pantallas, la camara, la grabacion y muestra la retroalimentacion.
 
