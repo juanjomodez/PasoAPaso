@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -14,9 +15,12 @@
   <title>Paso a Paso</title>
   <link rel="icon" href="img/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/estilos.css">
 </head>
+
 <body>
   <div id="fondo"></div>
 
@@ -46,7 +50,9 @@
     </div>
     <button class="enlace" id="btn-como">¿Cómo funciona?</button>
     <button class="enlace" id="btn-instalar" hidden>⬇ Instalar la app</button>
-    <p class="nota-ios" id="nota-ios" hidden>En iPhone o iPad: toca el botón Compartir y elige «Añadir a pantalla de inicio».</p>
+    <p class="nota-ios" id="nota-ios" hidden>En iPhone o iPad: toca el botón Compartir y elige «Añadir a pantalla de
+      inicio».</p>
+    <p class="creditos-autores">Hecho por <b>Juan Jose Mosquera Bermudez</b> y <b>David Elias Castro Ochoa</b></p>
   </section>
 
   <!-- COMO FUNCIONA -->
@@ -59,7 +65,8 @@
         <li><b>Practica con el video</b> de 15 segundos. Puedes grabarte con la cámara o subir un video tuyo.</li>
         <li><b>Recibe tu retroalimentación:</b> qué tan parecido te salió, qué hiciste bien y qué puedes mejorar.</li>
       </ol>
-      <p class="nota">Ponte a unos 2 o 3 metros de la cámara, que se te vea el cuerpo completo (sobre todo los pies) y busca un lugar con buena luz. Puedes grabarte de frente, de espaldas o de lado.</p>
+      <p class="nota">Ponte a unos 2 o 3 metros de la cámara, que se te vea el cuerpo completo (sobre todo los pies) y
+        busca un lugar con buena luz. Puedes grabarte de frente, de espaldas o de lado.</p>
       <button class="btn principal" id="btn-entendido">¡Entendido!</button>
     </div>
   </div>
@@ -74,6 +81,9 @@
     <div class="zona-video">
       <video id="video-charla" controls playsinline preload="metadata"></video>
     </div>
+    <p class="credito-video">Videos de la instructora: <b>Lau Dance</b> · <a
+        href="https://youtube.com/@laudance?si=uZ4_GUY-_OYUL6Dh" target="_blank" rel="noopener">Ver su canal</a> · <a
+        href="https://www.youtube.com/watch?v=2FsZl11VmIw" target="_blank" rel="noopener">Video original</a></p>
     <footer class="acciones">
       <button class="btn" id="btn-repetir-charla">↺ Ver otra vez</button>
       <button class="btn principal" id="btn-listo">Estoy listo, a practicar →</button>
@@ -89,12 +99,18 @@
     </header>
     <div class="modos">
       <button class="modo" id="btn-modo-grabar">
-        <span class="modo-icono"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="currentColor"/></svg></span>
+        <span class="modo-icono"><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="8" fill="currentColor" />
+          </svg></span>
         <span class="modo-titulo">Grabarme</span>
-        <span class="modo-desc">Usa la cámara de tu celular, tablet o computador y baila al tiempo con la instructora.</span>
+        <span class="modo-desc">Usa la cámara de tu celular, tablet o computador y baila al tiempo con la
+          instructora.</span>
       </button>
       <button class="modo" id="btn-modo-subir">
-        <span class="modo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg></span>
+        <span class="modo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 16V4M6 10l6-6 6 6M4 20h16" />
+          </svg></span>
         <span class="modo-titulo">Subir mi video</span>
         <span class="modo-desc">Graba con el celular siguiendo el video de práctica y súbelo acá.</span>
       </button>
@@ -118,6 +134,9 @@
         <span class="punto-rec" id="punto-rec">REC</span>
       </div>
     </div>
+    <p class="credito-video">Videos de la instructora: <b>Lau Dance</b> · <a
+        href="https://youtube.com/@laudance?si=uZ4_GUY-_OYUL6Dh" target="_blank" rel="noopener">Ver su canal</a> · <a
+        href="https://www.youtube.com/watch?v=2FsZl11VmIw" target="_blank" rel="noopener">Video original</a></p>
     <footer class="acciones">
       <span class="ayuda" id="ayuda-grabar"></span>
       <button class="btn principal" id="btn-empezar">Empezar</button>
@@ -135,15 +154,22 @@
       <div class="subir-video">
         <video id="video-practica-subir" controls playsinline preload="metadata"></video>
         <a class="btn" id="btn-descargar" download>⬇ Descargar video de práctica</a>
+        <p class="credito-video">Videos de la instructora: <b>Lau Dance</b> · <a
+            href="https://youtube.com/@laudance?si=uZ4_GUY-_OYUL6Dh" target="_blank" rel="noopener">Ver su canal</a> ·
+          <a href="https://www.youtube.com/watch?v=2FsZl11VmIw" target="_blank" rel="noopener">Video original</a></p>
       </div>
       <label class="soltar" id="soltar">
         <input type="file" id="archivo" accept="video/*" hidden>
-        <span class="soltar-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg></span>
+        <span class="soltar-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 16V4M6 10l6-6 6 6M4 20h16" />
+          </svg></span>
         <span class="soltar-texto">
           <span class="solo-mouse">Arrastra tu video acá<br>o haz clic para buscarlo</span>
           <span class="solo-toque">Toca acá para<br>elegir tu video</span>
         </span>
-        <span class="soltar-nota">Graba mientras sigues el video de práctica. Si tu video es más largo, se busca solo la parte que más se parece a la instructora.</span>
+        <span class="soltar-nota">Graba mientras sigues el video de práctica. Si tu video es más largo, se busca solo la
+          parte que más se parece a la instructora.</span>
       </label>
     </div>
   </section>
@@ -154,12 +180,13 @@
       <svg class="huellas" viewBox="0 0 200 200">
         <defs>
           <g id="huella">
-            <path d="M0 -44 C 15 -44, 23 -32, 22 -16 C 21 -2, 15 6, 12 14 C 10 19, 5 21, 0 21 C -6 21, -11 18, -12 12 C -14 2, -21 -6, -21 -18 C -21 -34, -13 -44, 0 -44 Z"/>
-            <path d="M-11 30 C -11 24, 11 24, 11 30 L 11 40 C 11 49, -11 49, -11 40 Z"/>
+            <path
+              d="M0 -44 C 15 -44, 23 -32, 22 -16 C 21 -2, 15 6, 12 14 C 10 19, 5 21, 0 21 C -6 21, -11 18, -12 12 C -14 2, -21 -6, -21 -18 C -21 -34, -13 -44, 0 -44 Z" />
+            <path d="M-11 30 C -11 24, 11 24, 11 30 L 11 40 C 11 49, -11 49, -11 40 Z" />
           </g>
         </defs>
-        <use href="#huella" class="h1" transform="translate(78 78) rotate(-14) scale(1.15)"/>
-        <use href="#huella" class="h2" transform="translate(126 118) rotate(12) scale(1.15)"/>
+        <use href="#huella" class="h1" transform="translate(78 78) rotate(-14) scale(1.15)" />
+        <use href="#huella" class="h2" transform="translate(126 118) rotate(12) scale(1.15)" />
       </svg>
       <h2>Analizando tu baile</h2>
       <ul class="fases" id="fases">
@@ -198,6 +225,9 @@
             </div>
           </div>
           <button class="btn chico" id="btn-comparar">▶ Ver los dos videos juntos</button>
+          <p class="credito-video">Videos de la instructora: <b>Lau Dance</b> · <a
+              href="https://youtube.com/@laudance?si=uZ4_GUY-_OYUL6Dh" target="_blank" rel="noopener">Ver su canal</a> ·
+            <a href="https://www.youtube.com/watch?v=2FsZl11VmIw" target="_blank" rel="noopener">Video original</a></p>
         </div>
       </div>
       <div class="res-der">
@@ -229,4 +259,5 @@
   </script>
   <script type="module" src="js/app.js"></script>
 </body>
+
 </html>

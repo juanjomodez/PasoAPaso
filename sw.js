@@ -1,8 +1,7 @@
 // Paso a Paso - service worker
 // - La interfaz se guarda para abrir rapido (y sin internet una vez visitada).
 // - MediaPipe y el modelo (archivos grandes) se guardan la primera vez que se usan.
-// - Los videos NO se guardan: son muy pesados y necesitan respuestas por rangos.
-const VERSION = "pasoapaso-v1";
+const VERSION = "pasoapaso-v2";
 const BASICOS = [
   "./", "index.html", "css/estilos.css", "js/app.js", "js/analisis.js", "js/poses.js",
   "img/logo.svg", "datos/referencias.json", "manifest.webmanifest",

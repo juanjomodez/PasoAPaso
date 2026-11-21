@@ -386,3 +386,28 @@ h1 span { color: var(--texto); font-size: .6em; vertical-align: .2em; }
 }
 .aviso-abrir[hidden] { display: none; }
 .aviso-abrir b { color: var(--amarillo); }
+
+
+/* creditos de los videos (Lau Dance) y de los autores */
+.credito-video {
+  text-align: center; color: var(--suave); font-size: .85rem; line-height: 1.4;
+  margin-top: 1vh; padding: 0 .5rem; flex: none;
+}
+.credito-video b { color: var(--texto); }
+.credito-video a, .creditos-autores a {
+  color: var(--amarillo); font-weight: 700; text-decoration: underline; text-underline-offset: 3px;
+  display: inline-block; padding: .3rem .15rem; /* area de toque mas comoda en celular */
+}
+.credito-video a:hover { color: var(--amarillo-claro); }
+.creditos-autores { text-align: center; color: var(--suave); font-size: .85rem; line-height: 1.4; max-width: 90vw; }
+.creditos-autores b { color: var(--amarillo); font-weight: 700; }
+
+@media (max-width: 700px) and (orientation: portrait) {
+  .credito-video, .creditos-autores { font-size: .78rem; }
+  #p-inicio { padding-bottom: max(3vh, env(safe-area-inset-bottom)); }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .credito-video { font-size: .75rem; margin-top: .4vh; }
+  .credito-video a { padding: .15rem .1rem; }
+  .creditos-autores { font-size: .75rem; }
+}
