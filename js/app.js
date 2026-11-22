@@ -9,7 +9,7 @@ const ES_TACTIL = window.matchMedia("(pointer: coarse)").matches;
 const MAX_SEGUNDOS = ES_TACTIL ? 30 : 60;   // el analisis en celular es mas lento
 const NIVEL_NUM = { muy_parecido: 4, parecido: 3, algo_parecido: 2, lejos: 1 };
 const CONEXIONES = [[11, 12], [11, 13], [13, 15], [12, 14], [14, 16], [11, 23], [12, 24], [23, 24],
-                    [23, 25], [25, 27], [27, 31], [24, 26], [26, 28], [28, 32]];
+[23, 25], [25, 27], [27, 31], [24, 26], [26, 28], [28, 32]];
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
@@ -72,7 +72,7 @@ $("#btn-entendido").addEventListener("click", () => {
   $("#modal-como").classList.remove("activa");
   try { localStorage.setItem("pasoapaso_visto", "1"); } catch (e) { /* sin localStorage */ }
 });
-try { if (!localStorage.getItem("pasoapaso_visto")) abrirComo(); } catch (e) { abrirComo(); }
+abrirComo(); // se muestra siempre al abrir la pagina
 
 $$(".tarjeta").forEach((t) => t.addEventListener("click", () => escogerPaso(t.dataset.paso)));
 
@@ -90,7 +90,7 @@ function escogerPaso(paso) {
   $("#btn-descargar").href = "videos/" + info.video_practica;
   $("#btn-descargar").setAttribute("download", info.video_practica);
   ir("p-tutorial");
-  charla.play().catch(() => {});
+  charla.play().catch(() => { });
   // mientras ve la explicacion se va cargando MediaPipe
   cargarDetector().catch((e) => console.error(e));
 }
@@ -99,7 +99,7 @@ function escogerPaso(paso) {
 $("#btn-repetir-charla").addEventListener("click", () => {
   const v = $("#video-charla");
   v.currentTime = 0;
-  v.play().catch(() => {});
+  v.play().catch(() => { });
 });
 $("#btn-listo").addEventListener("click", () => ir("p-modo"));
 
@@ -152,7 +152,7 @@ $("#btn-empezar").addEventListener("click", async () => {
   $("#ayuda-grabar").textContent = "¡Prepárate!";
   // Safari (iPhone/iPad) solo deja reproducir con sonido si el primer play() ocurre dentro del toque
   const pr = $("#video-practica-grabar");
-  pr.play().then(() => { pr.pause(); pr.currentTime = 0; }).catch(() => {});
+  pr.play().then(() => { pr.pause(); pr.currentTime = 0; }).catch(() => { });
   await cuentaRegresiva(5);
   if (!streamCamara) return; // se salio durante la cuenta
   empezarGrabacion();
@@ -192,7 +192,7 @@ function empezarGrabacion() {
   // el video de la instructora y la grabacion arrancan al mismo tiempo
   practica.currentTime = 0;
   grabador.start(250);
-  practica.play().catch(() => {});
+  practica.play().catch(() => { });
   $("#punto-rec").classList.add("on");
   $("#ayuda-grabar").textContent = "Grabando... sigue a la instructora";
   practica.onended = () => {
@@ -293,8 +293,8 @@ $("#btn-comparar").addEventListener("click", () => {
   const vu = $("#video-usuario"), vi = $("#video-instr");
   vu.currentTime = ultimoResultado.inicio;
   vi.currentTime = 0;
-  vu.play().catch(() => {});
-  vi.play().catch(() => {});
+  vu.play().catch(() => { });
+  vi.play().catch(() => { });
   cancelAnimationFrame(animacion);
   const dibujar = () => {
     dibujarEsqueleto(vu);
@@ -351,7 +351,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
 $("#btn-instalar").addEventListener("click", async () => {
   if (!eventoInstalar) return;
   eventoInstalar.prompt();
-  await eventoInstalar.userChoice.catch(() => {});
+  await eventoInstalar.userChoice.catch(() => { });
   eventoInstalar = null;
   $("#btn-instalar").hidden = true;
 });
