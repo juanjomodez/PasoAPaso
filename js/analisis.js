@@ -17,6 +17,7 @@ const LIMITES = {
   ritmo: [0.75, 1.35],
   desfase: 0.08,
   otro_paso: 0.9, // se avisa si otra referencia queda a menos del 90 % de la distancia
+  quieto: 0.25,   // si el movimiento principal es menos del 25 % del de la instructora, se considera quieto
 };
 
 // ---------------------------------------------------------------- utilidades
@@ -278,6 +279,20 @@ export function analizar(poses, paso, ref) {
   for (const k in au) prop[k] = ar[k] > 1e-6 ? au[k] / ar[k] : 1;
   const bien = [], mejorar = [];
 
+  // el DTW compara la forma del movimiento y no el tamano, entonces si la persona casi no se mueve
+  // puede salir "parecido". Por eso el nivel tambien depende de cuanto se movio en el movimiento principal
+  const principal = paso === "basico" ? prop.pies_adelante
+                  : paso === "lateral" ? prop.pies_lado
+                  : Math.max(prop.giro, prop.pies_lado);
+  const minimo = { basico: LIMITES.basico_adelante[0], lateral: LIMITES.lateral_lado[0], cruzado: LIMITES.cruzado_giro[0] }[paso];
+  const quieto = principal < LIMITES.quieto;
+  if (quieto) {
+    nivel = "lejos";
+    mejorar.push("Casi no se detectó movimiento. Baila el paso completo siguiendo a la instructora.");
+  } else if (principal < minimo && (nivel === "muy_parecido" || nivel === "parecido")) {
+    nivel = "algo_parecido";
+  }
+
   // otro paso: si otra referencia se parece bastante mas que la que escogio
   let otro = null, dOtro = Infinity;
   for (const k of Object.keys(ref.pasos)) {
@@ -331,9 +346,9 @@ export function analizar(poses, paso, ref) {
   }
   if (msg === null && desfase > LIMITES.desfase) msg = "Vas un poco atrasado respecto al video.";
   else if (msg === null && desfase < -LIMITES.desfase) msg = "Te estás adelantando al video.";
-  if (msg) mejorar.push(msg); else bien.push("Llevas bien el tiempo con la instructora.");
+  if (msg) mejorar.push(msg); else if (!quieto) bien.push("Llevas bien el tiempo con la instructora.");
 
-  if (!bien.length) bien.push("Hiciste el ejercicio completo, eso ya es un buen comienzo.");
+  if (!bien.length) bien.push(quieto ? "Se te detectó bien en la cámara, ahora falta el movimiento." : "Hiciste el ejercicio completo, eso ya es un buen comienzo.");
   if (!mejorar.length) mejorar.push("Para seguir mejorando intenta hacerlo sin mirar el video, solo con la música.");
   return { nivel, titulo: ref.titulos[nivel], resumen: ref.resumen[nivel], bien, mejorar, avisos,
            detalle: { distancia: d, simetria: sim, desfase, ritmo: [ru, rr], proporcion: prop, otro, dOtro } };
