@@ -21,8 +21,8 @@ Todo se hace en el navegador de la persona y el video no se envía a ningún lad
 - Carpeta del Drive con el notebook y los datos: https://drive.google.com/drive/folders/1A7z0A_OIzO7Gn-6L8D_8E5ea7HdrTiS1?usp=sharing
 - Notebook directo: https://drive.google.com/file/d/1-fQbAjc_AG6w9rrZAunJgxrhGWHZwmkP/view?usp=sharing
 
-En este repositorio también hay dos carpetas: "video demostracion", donde está el video del proyecto, y "documento", 
-donde está el documento escrito. Ahí se explica la problemática, la arquitectura, la metodología, la implementación, los datos, 
+En este repositorio también hay 3 carpetas: "video demostracion", donde está el video del proyecto,  "documento", 
+donde está el documento escrito y "poster", donde esta el poster en imagen y pdf. Ahí se explica la problemática, la arquitectura, la metodología, la implementación, los datos, 
 la interfaz, los resultados y las conclusiones.
 
 ## Cómo está construida la página
